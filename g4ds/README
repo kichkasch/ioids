@@ -1,0 +1,72 @@
+README for G4DS
+
+Grid for Digital Security
+Michael Pilgermann
+mpilgerm@glam.ac.uk
+
+Content
+-------
+- Introduction
+- Requirements and Installation
+- HOWTO use
+- Bugs
+- ToDo
+
+
+Introduction
+------------
+Grid for Digital Security (G4DS) is a project of the ISRG of the UoG / SoC. This implementation
+is a partial approach only, employing the concerns researched by Michael Pilgermann for
+his PhD project.
+
+G4DS in this view is a peer-to-peer based knowledge grid communciation plattform. Nodes in
+the grid network are called members and they are grouped into so called communities (or better
+Trusting Communities).
+
+
+Requirements
+------------
+--> see file INSTALL
+
+
+HOWTO use
+---------
+--> see file HOWTO
+
+
+Bugs
+----
+
+
+ToDo
+----
+* Permission
+    - Create policies for protecting authority actions
+    - check action strings whilst parsing policies
+
+* Service Integration
+    - finish Test Service
+    - add message formats to services
+        * either with database (too much hassles)
+        * or via KSDL string parsing at initialisation time (not as nice - but very quick therefore) ;)
+    - Owners for Fifos
+    
+* Refactoring
+    - split g4dsconfigurationncontroller module
+    - split descriptionprocessor module
+    - job implementation
+    - structure maintainlib
+   
+* Documents
+    - XML Schemas for descriptions
+   
+* Documentation
+    - Implementation Document
+        > G4DS service (init script)
+        > Application connection
+        > Routing
+	> Permission control / access matrix
+	> Service integration
+    - api docs
+        * g4dsconfigurationcontroller.ServiceController
+        * descriptionprocessor.ServiceDescriptionProcessor

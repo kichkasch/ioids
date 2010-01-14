@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Convert from SQL to Postgres -->
+<DATATYPES>
+	<DATATYPE from_type="Postgresv8.0" to_type="Postgresv7.x">
+		<CONVERT from="boolean" to="bool" replace="true"/>
+		<CONVERT from="smallint" to="int8" replace="true"/>
+		<CONVERT from="float" to="float8" replace="true"/>
+		<CONVERT from="int" to="int"/>
+		<CONVERT from="int" to="int8"/>
+		<CONVERT from="integer" to="int8" replace="true"/>
+		<CONVERT from="character" to="text" replace="true" />
+	</DATATYPE>
+	<DATATYPE from_type="Postgresv8.0" to_type="AccessXP">
+		<CONVERT from="bigint" to="number" replace="true" />
+		<CONVERT from="int" to="number" replace="true" />
+		<CONVERT from="character" to="text" replace="true" />
+		<CONVERT from="varchar" to="text" replace="true" />
+		<CONVERT from="bigserial" to="number" replace="true"  />
+		<CONVERT from="serial" to="number" replace="true" />
+		<CONVERT from="inet" to="number" replace="true" />
+		<CONVERT from="macaddr" to="number" replace="true" />
+	</DATATYPE>
+</DATATYPES>

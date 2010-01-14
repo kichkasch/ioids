@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Policy file for Grid for Digital Security - contains the default settings for rules.
+    mpilgerm
+    last change: 2006-10-19
+-->
+<g4dspolicy>
+    <rules>
+        <ruleset>
+            <id>RS000000</id>
+            <name>Major Ruleset</name>
+            <rule>
+                <id>R00000</id>
+                <comment>Pass on control messages to rule set for ctrl messages</comment>
+                <actor type='role'>all_actors</actor>
+                <action type='action_id'>g4ds.control</action>
+                <target type='role'>all_targets</target>
+                <reaction type='redirect'>rs_g4ds_ctrl</reaction>
+            </rule>
+            
+            <rule>
+                <id>R00001</id>
+                <comment>Pass on service messages to rule set for service messages</comment>
+                <actor type='role'>all_actors</actor>
+                <action type='action_id'>g4ds.service</action>
+                <target type='role'>all_targets</target>
+                <reaction type='redirect'>rs_g4ds_services</reaction>
+            </rule>
+            
+            <rule>
+                <id>R00002</id>
+                <comment>Pass on routing messages to rule set for routing messages</comment>
+                <actor type='role'>all_actors</actor>
+                <action type='action_id'>g4ds.routing</action>
+                <target type='communitygroup'>*</target>
+                <reaction type='redirect'>rs_g4ds_routing</reaction>
+            </rule>
+            <!--
+                You could integrate your own service here.
+                
+                Check this rule for the test service chat - you could also redirect into another
+                ruleset and specify this in a seperate policy file
+                Dont forget then to mention this file in the config module for autoloading policies.
+                -->
+            <rule>
+                <id>R00003</id>
+                <comment>Allow services message for test service 'chat'</comment>
+                <actor type='role'>all_actors</actor>
+                <action type='action_id'>chat</action>
+                <target type='servicegroup'>*</target>
+                <reaction type='direct'>allow</reaction>
+            </rule>
+            
+            <!-- You must always provide a default rule, the permission controller will run into, if no other
+                 rule could be applied for a request -->
+            <rule>
+                <id>R999999</id>    
+                <comment>Allow all other traffic</comment>
+                <actor type='role'>all_actors</actor>
+                <action type='role'>all_operations</action>
+                <target type='role'>all_targets</target>
+                <reaction type='direct'>drop</reaction>
+            </rule>
+        </ruleset>
+        
+        <ruleset>
+            <id>rs_g4ds_ctrl</id>
+            <name>G4DS Control Messages</name>
+            <rule>
+                <id>R00001</id>
+                <comment>Each member may only write its own member descriptions</comment>
+                <actor type='membergroup'>authorities_member</actor>
+                <action type='action_id'>g4ds.control.member</action>
+                <target type='membergroup'>*</target>
+                <reaction type='direct'>allow</reaction>
+            </rule>
+            <rule>
+                <id>R00002</id>
+                <comment>Community authorities are allowed everything for their communities</comment>
+                <actor type='role'>communityauthorities</actor>
+                <action type='action_id'>g4ds.control.community</action>
+                <target type='communitygroup'>*</target>
+                <reaction type='direct'>allow</reaction>
+            </rule>
+            <rule>
+                <id>R00004</id>
+                <comment>Service authorities are allowed everything for their services</comment>
+                <actor type='role'>serviceauthorities</actor>
+                <action type='action_id'>g4ds.control.service</action>
+                <target type='servicegroup'>*</target>
+                <reaction type='direct'>allow</reaction>
+            </rule>
+            <rule>
+                <id>R00005</id>
+                <comment>Each member may push its own routing table</comment>
+                <actor type='membergroup'>authorities_member</actor>
+                <action type='action_id'>g4ds.control.routing</action>
+                <target type='membergroup'>*</target>
+                <reaction type='direct'>allow</reaction>
+            </rule>
+            <rule>
+                <id>R00010</id>
+                <comment>Everybody is allowed to read from the control system</comment>
+                <actor type='role'>all_actors</actor>
+                <action type='role'>g4ds_control_read</action>
+                <target type='role'>all_targets</target>
+                <reaction type='direct'>allow</reaction>
+            </rule>
+            <rule>
+                <id>R00011</id>
+                <comment>Everybody is allowed to send replies for the control system</comment>
+                <actor type='role'>all_actors</actor>
+                <action type='role'>g4ds_control_reply</action>
+                <target type='role'>all_targets</target>
+                <reaction type='direct'>allow</reaction>
+            </rule>
+            <rule>
+                <id>R00100</id>
+                <comment>Everything else in the g4ds controller is forbidden!</comment>
+                <actor type='role'>all_actors</actor>
+                <action type='action_id'>g4ds.control</action>
+                <target type='role'>all_targets</target>
+                <reaction type='direct'>drop</reaction>
+            </rule>
+        </ruleset>
+        
+        <ruleset>
+            <id>rs_g4ds_routing</id>
+            <name>G4DS Routing Messages</name>
+            <rule>
+                <id>R00000001</id>
+                <comment>Gateways are allowed to route messages</comment>
+                <actor type='role'>communitygateways</actor>
+                <action type='action_id'>g4ds.routing</action>
+                <target type='communitygroup'>*</target>
+                <reaction type='direct'>allow</reaction>                
+            </rule>
+            <rule>
+                <id>R99999999</id>
+                <comment>Finally, drop all other routing messages</comment>
+                <actor type='role'>all_actors</actor>
+                <action type='action_id'>g4ds.routing</action>
+                <target type='role'>all_targets</target>
+                <reaction type='direct'>drop</reaction>
+            </rule>
+        </ruleset>
+        
+        <ruleset>
+            <id>rs_g4ds_services</id>
+            <name>G4DS Service Messages</name>
+            <!--
+                You could stop one certain service to be served the following way
+                
+            <rule>
+                <id>R00000001</id>
+                <comment>Stop service S111111 from receiving any messages</comment>
+                <actor type='role'>all_actors</actor>
+                <action type='action_id'>g4ds.service.S111111</action>
+                <target type='role'>all_targets</target>
+                <reaction type='direct'>drop</reaction>
+            </rule>
+            -->
+            
+            <rule>
+                <id>R99999999</id>
+                <comment>Finally, allow all service messages</comment>
+                <actor type='role'>all_actors</actor>
+                <action type='action_id'>g4ds.service</action>
+                <target type='role'>all_targets</target>
+                <reaction type='direct'>allow</reaction>
+            </rule>
+        </ruleset>
+    </rules>
+
+</g4dspolicy>

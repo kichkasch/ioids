@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!-- sample inserts for testing SoapSy server with IOIDS extension 
+     Michael Pilgermann
+     04/11/2005
+     mpilgerm@glam.ac.uk
+     -->
+
+<RELATIONS command="INSERT" datatype="Postgresv8.0">
+    <REL name="ioids_event">
+        <!--
+            let us put first the extension specific stuff
+            -->
+        <ATT name="timestamp_received" type="timestamp">'now'</ATT>
+        <ATT name="community_id" type="varchar(100)">'C001'</ATT>
+        <REL name="ioids_classification">
+            <ATT name="classification_name" type="text">'public'</ATT>
+        </REL>
+        <REL name="ioids_sender">
+            <REL name="ioids_peer">
+                <ATT name="peer_memberid" type="varchar(100)">'M001'</ATT>
+            </REL>
+        </REL>
+        <REL name="ioids_source">
+            <REL name="ioids_peer">
+                <ATT name="peer_memberid" type="varchar(100)">'M002'</ATT>
+            </REL>
+        </REL>
+        
+        <!--
+            and now the actual event data
+            -->
+        <REL name="event">
+            <ATT name="timestmp" type="timestamp">'now'</ATT>
+            <REL name="event_type">
+                <ATT name="event_type_name" type="text">'generic'</ATT>
+            </REL>
+            <REL name="data">
+                <ATT name="data_text" type="text">'ICMP Unreachable (Undefined code)'</ATT>
+            </REL>
+    
+            <REL name="reporter">
+                <REL name="agent">
+                    <ATT name="agent_name" type="text">'snort log reporter'</ATT> 
+                    <ATT name="agent_class_id" type="bigint">'3'</ATT> 
+                    <REL name="computer">
+                        <ATT name="hostname" type="text">'j4-itrl-08'</ATT> 
+                        <ATT name="ip" type="inet">'193.63.129.8'</ATT> 
+                    </REL>
+                </REL>
+            </REL>
+        
+            <REL name="observer">
+                <REL name="agent">
+                    <ATT name="agent_name" type="text">'snort log observer'</ATT> 
+                    <ATT name="agent_class_id" type="bigint">'3'</ATT> 
+                    <REL name="computer">
+                        <ATT name="hostname" type="text">'j4-itrl-08'</ATT> 
+                        <ATT name="ip" type="inet">'193.63.129.8'</ATT> 
+                    </REL>
+                </REL>
+            </REL>
+            
+            <REL name="destination">
+                <ATT name="dstn_name" type="text">'destination name unknown'</ATT> 
+                <REL name="agent">
+                    <ATT name="agent_name" type="text">'destination name'</ATT> 
+                    <ATT name="agent_class_id" type="bigint">'1'</ATT> 
+                    <REL name="computer">
+                        <ATT name="hostname" type="text">'unknown destination'</ATT> 
+                        <ATT name="ip" type="inet">'193.63.129.202'</ATT> 
+                    </REL>
+                </REL>
+            </REL>
+            
+            <REL name="source">
+                <REL name="agent">
+                    <ATT name="agent_name" type="text">'source name unknown'</ATT> 
+                    <ATT name="agent_class_id" type="bigint">'1'</ATT> 
+                    <REL name="computer">
+                        <ATT name="hostname" type="text">'unknown source'</ATT> 
+                        <ATT name="ip" type="inet">'193.63.147.33'</ATT> 
+                    </REL>
+                </REL>
+            </REL>
+        </REL>
+    </REL>
+</RELATIONS>

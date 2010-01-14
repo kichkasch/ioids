@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Policy file for Grid for Digital Security - contains the some test rules.
+    mpilgerm
+    last change: 2006-10-18
+-->
+<g4dspolicy>
+    <rules>
+        <ruleset>
+            <id>RS000000</id>
+            <name>Major Ruleset</name>
+            <rule>
+                <id>R0000</id>
+                <comment>Pass on control messages to rule set for ctrl messages</comment>
+                <actor type='role'>all_actors</actor>
+                <action type='action_id'>g4ds.control</action>
+                <target type='role'>all_targets</target>
+                <reaction type='redirect'>rs_g4ds_ctrl</reaction>
+            </rule>
+            
+            <!-- You must always provide a default rule, the permission controller will run into, if no other
+                 rule could be applied for a request -->
+            <rule>
+                <id>R999999</id>    
+                <comment>Allow all other traffic</comment>
+                <actor type='role'>all_actors</actor>
+                <action type='role'>all_operations</action>
+                <target type='role'>all_targets</target>
+                <reaction type='direct'>allow</reaction>
+            </rule>
+        </ruleset>
+        
+        <ruleset>
+            <id>rs_g4ds_ctrl</id>
+            <name>G4DS Control Messages</name>
+            <rule>
+                <id>R00001</id>
+                <comment>M003 may do all g4ds control on C004 - test</comment>
+                <actor type='member'>M003</actor>
+                <action type='action_id'>g4ds.control</action>
+                <target type='community'>C004</target>
+                <reaction type='direct'>allow</reaction>
+            </rule>
+            <rule>
+                <id>R00002</id>
+                <comment>Everybody is allowed to do member requests / replies for now</comment>
+                <actor type='role'>all_actors</actor>
+                <action type='action_id'>g4ds.control.member</action>
+                <target type='membergroup'>*</target>
+                <reaction type='direct'>allow</reaction>
+            </rule>
+            <rule>
+                <id>R00003</id>
+                <comment>Community authorities are allowed everything for their communities</comment>
+                <actor type='role'>communityauthorities</actor>
+                <action type='action_id'>g4ds.control.community</action>
+                <target type='communitygroup'>*</target>
+                <reaction type='direct'>allow</reaction>
+            </rule>
+            <rule>
+                <id>R00004</id>
+                <comment>Everything else in the g4ds controller is forbidden!</comment>
+                <actor type='role'>all_actors</actor>
+                <action type='action_id'>g4ds.control</action>
+                <target type='role'>all_targets</target>
+                <reaction type='direct'>drop</reaction>
+            </rule>
+        
+        </ruleset>
+    </rules>
+
+</g4dspolicy>

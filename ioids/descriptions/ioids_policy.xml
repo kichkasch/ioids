@@ -1,0 +1,82 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ioids-policy>
+	<rule>	<!-- skip everything local with type ioids - otherwise we get loops; you really shouldn't remove that one ;) -->
+		<id>00010</id>
+		<situation>
+			<origin>local</origin>
+			<subsystem>ioids</subsystem>
+		</situation>
+		
+		<reactions>
+			<reaction number="1">
+				<type>Terminate</type>
+			</reaction>
+		</reactions>
+	</rule>
+	
+	<rule>
+		<id>00100</id>
+		<situation>
+			<origin>local</origin>
+			<subsystem>*</subsystem>
+		</situation>
+		
+		<reactions>
+			<reaction number="1">
+				<type>NewLocalEvent</type>
+				<parameters>
+					<classification>7</classification>
+					<community>C001</community>
+					<distribute>
+						<domain type="community">C001</domain>
+					</distribute>
+				</parameters>
+			</reaction>
+			<reaction number="2">
+				<type>NewLocalEvent</type>
+				<parameters>
+					<classification>7</classification>
+					<community>C002</community>
+					<distribute>
+						<domain type="community">C002</domain>
+					</distribute>
+				</parameters>
+			</reaction>
+			
+			<reaction number="5">
+				<type>Terminate</type>
+			</reaction>
+		</reactions>
+	</rule>
+	
+	<rule>
+		<id>00200</id>
+		<situation>
+			<origin>remote</origin>
+			<sender>M001,M002</sender>
+		</situation>
+		
+		<reactions>
+			<reaction number="1">
+				<type>NewLocalEvent</type>
+				<parameters>
+					<classification>Auto</classification>
+					<community>Auto</community>
+				</parameters>
+			</reaction>
+			<reaction number="99">
+				<type>Terminate</type>
+			</reaction>
+		</reactions>
+	</rule>
+	
+	<rule>
+		<id>99999</id>
+		<situation/>
+		<reactions>
+			<reaction number="1">
+				<type>Terminate</type>
+			</reaction>
+		</reactions>
+	</rule>
+</ioids-policy>

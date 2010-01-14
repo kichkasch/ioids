@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="${default-encoding}"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xsd:element name="mdl">
+    <xsd:complexType mixed="true">
+      <xsd:choice minOccurs="0" maxOccurs="unbounded">
+        <xsd:element ref="id"/>
+        <xsd:element ref="name"/>
+        <xsd:element ref="creationdate"/>
+        <xsd:element ref="description"/>
+        <xsd:element ref="algorithms"/>
+        <xsd:element ref="protocols"/>
+        <xsd:element ref="communities"/>
+      </xsd:choice>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="id" type="xsd:string"/>
+  <xsd:element name="name" type="xsd:string"/>
+  <xsd:element name="creationdate" type="xsd:string"/>
+  <xsd:element name="description">
+    <xsd:complexType mixed="true">
+      <xsd:choice minOccurs="0" maxOccurs="unbounded">
+        <xsd:element ref="fullname"/>
+        <xsd:element ref="organisation"/>
+        <xsd:element ref="location"/>
+      </xsd:choice>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="fullname" type="xsd:string"/>
+  <xsd:element name="organisation" type="xsd:string"/>
+  <xsd:element name="location">
+    <xsd:complexType mixed="true">
+      <xsd:choice minOccurs="0" maxOccurs="unbounded">
+        <xsd:element ref="country"/>
+        <xsd:element ref="city"/>
+      </xsd:choice>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="country" type="xsd:string"/>
+  <xsd:element name="city" type="xsd:string"/>
+  <xsd:element name="algorithms">
+    <xsd:complexType>
+      <xsd:choice minOccurs="0" maxOccurs="unbounded">
+        <xsd:element ref="algorithm"/>
+      </xsd:choice>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="algorithm">
+    <xsd:complexType mixed="true">
+      <xsd:choice minOccurs="0" maxOccurs="unbounded">
+        <xsd:element ref="internalid"/>
+        <xsd:element ref="name"/>
+        <xsd:element ref="credential"/>
+      </xsd:choice>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="internalid" type="xsd:string"/>
+  <xsd:element name="credential">
+    <xsd:complexType mixed="true">
+      <xsd:choice minOccurs="0" maxOccurs="unbounded">
+        <xsd:element ref="username"/>
+        <xsd:element ref="publickey"/>
+      </xsd:choice>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="username">
+      <xsd:attribute name="inuse" use="required"/>
+
+  </xsd:element>
+  <xsd:element name="publickey" type="xsd:string"/>
+  <xsd:element name="protocols">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="protocol"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="protocol">
+    <xsd:complexType mixed="true">
+      <xsd:choice minOccurs="0" maxOccurs="unbounded">
+        <xsd:element ref="internalid"/>
+        <xsd:element ref="name"/>
+      </xsd:choice>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="communities">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="community"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="community">
+    <xsd:complexType mixed="true">
+      <xsd:choice minOccurs="0" maxOccurs="unbounded">
+        <xsd:element ref="id"/>
+        <xsd:element ref="endpoints"/>
+      </xsd:choice>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="endpoints">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="endpoint"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="endpoint">
+    <xsd:complexType mixed="true">
+      <xsd:choice minOccurs="0" maxOccurs="unbounded">
+        <xsd:element ref="protocolid"/>
+        <xsd:element ref="algorithmid"/>
+        <xsd:element ref="address"/>
+      </xsd:choice>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="protocolid" type="xsd:string"/>
+  <xsd:element name="algorithmid" type="xsd:string"/>
+  <xsd:element name="address" type="xsd:string"/>
+</xsd:schema>

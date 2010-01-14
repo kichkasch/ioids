@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+	WSDL for Grid for Digital Security (G4DS) knowledge GRID service
+	The service G4DS is a KGRID service an is defined at another location. This document only describes the types and interfaces, used to 
+	exchange the knowledge
+-->
+<definitions
+	name="G4DS"
+	xmlns="http://schemas.xmlsoap.org/wsdl/" 
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" 
+	xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" 
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" 
+	xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" 
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl"
+	xmlns:g4ds="http://www.glam.ac.uk/soc/isrg/wsdl/g4ds/" 
+	targetNamespace="http://www.glam.ac.uk/soc/isrg/wsdl/g4ds/">
+	
+	<types>
+		<xsd:schema
+			xmlns="http://www.w3.org/2001/XMLSchema"
+			targetNamespace="http://www.glam.ac.uk/soc/isrg/wsdl/g4ds/">
+		
+			<xsd:complexType name="ResultDetectedAttacks">
+				<xsd:all>
+					<xsd:element name="timeslot" type="g4ds:Timeslot"/>
+					<xsd:element name="attackElements" type="g4ds:AttackElementsArray"/>
+				</xsd:all>
+			</xsd:complexType>
+		
+			<xsd:complexType name="AttackElementsArray">
+				<xsd:complexContent>
+					<xsd:restriction base="soapenc:Array">
+						<xsd:attribute ref="soapenc:arrayType" wsdl:arrayType="g4ds:AttackElement[]"/>
+					</xsd:restriction>
+				</xsd:complexContent>
+			</xsd:complexType>
+			
+			<xsd:complexType name="AttackElement">
+				<xsd:all>
+					<xsd:element name="id" type="xsd:string"/>
+					<xsd:element name="createtime" type="xsd:string"/>
+					<xsd:element name="detecttime" type="xsd:string"/>
+					<xsd:element name="analyzertime" type="xsd:string"/>
+					<xsd:element name="source" type="g4ds:node"/>
+					<xsd:element name="target" type="g4ds:node"/>
+					<xsd:element name="detector" type="g4ds:node"/>
+					<xsd:element name="analyzer" type="g4ds:node"/>
+				</xsd:all>
+			</xsd:complexType>
+		
+			<xsd:complexType name="Timeslot">
+				<xsd:all>
+					<xsd:element name="startdate" type="xsd:date"/>
+					<xsd:element name="starttime" type="xsd:time"/>
+					<xsd:element name="enddate" type="xsd:date"/>
+					<xsd:element name="endtime" type="xsd:time"/>
+				</xsd:all>
+			</xsd:complexType>
+			
+			<xsd:complexType name="Node">
+				<xsd:all>
+					<xsd:element name="id" type="xsd:string"/>
+					<xsd:element name="name" type="xsd:string"/>
+					<xsd:element name="class" type="xsd:string"/>
+					<xsd:element name="manufactorer" type="xsd:string"/>
+					<xsd:element name="model" type="xsd:string"/>
+					<xsd:element name="version" type="xsd:string"/>
+					<xsd:element name="ipaddress" type="xsd:string"/>
+					<xsd:element name="hostname" type="xsd:string"/>
+					<xsd:element name="os" type="g4ds:os"/>
+					<xsd:element name="user" type="xsd:string"/>
+					<xsd:element name="process" type="xsd:string"/>
+					<xsd:element name="description" type="xsd:string"/>
+				</xsd:all>
+			</xsd:complexType>
+			
+			<xsd:complexType name="os">
+				<xsd:all>
+					<xsd:element name="name" type="xsd:string"/>
+					<xsd:element name="vendor" type="xsd:string"/>
+					<xsd:element name="version" type="xsd:string"/>
+				</xsd:all>
+			</xsd:complexType>
+		
+			<xsd:complexType name="AttackFilter">
+				<xsd:all>
+					<xsd:element name="source" type="g4ds:node"/>
+					<xsd:element name="target" type="g4ds:node"/>
+					<xsd:element name="detector" type="g4ds:node"/>
+					<xsd:element name="analyzer" type="g4ds:node"/>
+				</xsd:all>
+			</xsd:complexType>
+		
+		</xsd:schema>
+	</types>
+	
+	<message name="doGetDetectedAttacks">
+		<part name="timeslot" type="g4ds:Timeslot"/>
+		<part name="filter" type="g4ds:AttackFilter"/>
+		<part name="maxresults" type="xsd:int"/>
+	</message>
+	
+	<message name="doGetDetectedAttacksResponse">
+		<part name="return" type="g4ds:ResultDetectedAttacks"/>
+	</message>
+
+	<portType name="g4dsport">
+		<operation name="doGetDetectedAttacks">
+			<input message="g4ds:doGetDetectedAttacks"/>
+			<output message="g4ds:doGetDetectedAttacksResponse"/>
+		</operation>
+	</portType>
+
+	<binding name="G4DSBinding" type="g4ds:g4dsport">
+		<soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+		
+		<operation name="getDetectedAttacks">
+			<soap:operation soapAction="http://www.glam.ac.uk/soc/isrg/wsdl/g4ds/"/>
+			<input>
+				<soap:body use="encoded"
+						namespace="http://www.glam.ac.uk/soc/isrg/wsdl/g4ds/"
+						encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+			</input>
+			<output>
+				<soap:body use="encoded"
+						namespace="http://www.glam.ac.uk/soc/isrg/wsdl/g4ds/"
+						encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+			</output>
+		</operation>
+	</binding>
+	
+	<service name="G4DSService">
+		<port name="G4DSPort" binding="g4ds:G4DSBinding">
+			<soap:address location="http://192.168.1.1/g4ds/version0.1"/>
+		</port>
+	</service>
+</definitions>

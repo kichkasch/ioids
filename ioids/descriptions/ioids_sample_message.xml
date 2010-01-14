@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!--
+    Sample IOIDS message
+    
+    Michael Pilgermann
+    mpilgerm@glam.ac.uk
+    
+    History
+    24/11/2005 - mpilgerm
+        - initial version
+    -->
+
+<ioids-message>
+    <ioidsevent>
+        bla bla
+        <event>
+            bla bla
+        </event>
+    </ioidsevent>
+    
+    <relations>
+        <relation type="parent">
+            <event encoding="idmef">
+                <idmef>
+                    blabla
+                </idmef>
+            </event>
+            <extension type="syslog">
+                <syslog>
+                    <timestamp>2005-10-13 11:50</timestamp>
+                    blabla
+                </syslog>
+            </extension>
+        </relation>
+    
+        <relation type="reference">
+            <event encoding="idmef">
+                <idmef>
+                    other blabla
+                </idmef>
+            </event>
+            <extension type="ioids">
+                <ioidsevent>
+                    even other blabla
+                </ioidsevent>
+            </extension>
+        </relation>
+    </relations>
+    
+</ioids-message>

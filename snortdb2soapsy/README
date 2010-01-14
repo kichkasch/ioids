@@ -1,0 +1,22 @@
+README for SnortDB To SoapSy logger
+
+SnortDB To SoapSy (SnDB2Soapsy)
+Michael Pilgermann
+mpilgerm@glam.ac.uk
+
+Content
+-------
+- Introduction
+- Bugs
+- ToDo
+
+Introduction
+------------
+SnDB2Soapsy is a tool which collects event information from a snortdb database, processes and transforms
+it and creates with the knowledge new events in the XML RPC database.
+
+Bugs
+----
+
+ToDo
+----

@@ -1,0 +1,5 @@
+recursive-include sql *.sql
+include INSTALL
+include README
+include descriptions/IOIDS_SoapSy_DatabaseSchema.xml
+include thirdparty/soap_db/soap_server/XSM.py thirdparty/soap_db/soap_server/XDS.py thirdparty/soap_db/soap_server/xsmrc thirdparty/soap_db/soap_server/XSM-configuration.xml

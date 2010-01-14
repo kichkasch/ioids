@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mdl>
+	<id>M10001</id>
+	<name>UoG SoC ISRG</name>
+	<creationdate>23/06/2005</creationdate>
+	<description>
+		<fullname>Information Security Research Group</fullname>
+		<organisation>University of Glamorgan / School of Computing</organisation>
+		<location>
+			<country>United Kingdom</country>
+			<city>Cardiff</city>
+		</location>
+	</description>
+	<algorithms>
+		<algorithm>
+			<internalid>al001</internalid>
+			<name>DSA</name>
+			<credential>
+				<username inuse="0"></username>
+				<publickey>public DSA key here</publickey>
+			</credential>
+		</algorithm>
+		<algorithm>
+			<internalid>al002</internalid>
+			<name>RSA</name>
+			<credential>
+				<username inuse="1">uog_isrg</username>
+				<publickey>public RSA key here</publickey>
+			</credential>
+		</algorithm>
+	</algorithms>
+	<protocols>
+		<protocol>
+			<internalid>pr001</internalid>
+			<name>SOAP</name>
+		</protocol>
+	</protocols>
+	<communities>
+		<community>
+			<id>C10001</id>
+			<endpoints>
+				<endpoint>
+					<protocolid>pr001</protocolid>
+					<algorithmid>al001</algorithmid>
+					<address>http://api.comp.glam.ac.uk/isrg/g4ds</address>
+				</endpoint>
+			</endpoints>
+		</community>
+	</communities>
+</mdl>

@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Policy file for Grid for Digital Security - contains the standard roles and their groupings
+    mpilgerm
+    last change: 2005-10-13
+    -->
+<g4dspolicy>
+    <!--
+        Define the names and descriptions for the roles first
+        -->
+    <roles>
+        <roleset type='actors'>
+            <role>
+                <name>all_actors</name>
+                <description>All actors</description>
+            </role>
+            <role>
+                <name>contributor</name>
+                <description>Representatives of this role may contribute to the network</description>
+            </role>
+            <role>
+                <name>reader</name>
+                <description>Representatvies of this role may read from the g4ds network</description>
+            </role>
+	    <role>
+	    	<name>member_tc001</name>
+		<description>All members of the TC with ID C001</description>
+	    </role>
+            <role>
+                <name>serviceauthorities</name>
+                <description>Authorities for services</description>
+            </role>
+            <role>
+                <name>communityauthorities</name>
+                <description>Authorities for communities</description>
+            </role>
+        </roleset>
+
+        <roleset type='operations'>
+            <role>
+                <name>all_operations</name>
+                <description>All operations</description>
+            </role>
+            <role>
+                <name>update</name>
+                <description>Perform an update on a certain object</description>
+            </role>
+            <role>
+                <name>read</name>
+                <description>Read information about a certain object</description>
+            </role>
+            <role>
+                <name>insert</name>
+                <description>Insert information into a certain object group</description>
+            </role>
+            <role>
+                <name>g4ds_control_changes</name>
+                <description>Apply changes to g4ds subsystem</description>
+            </role>
+        </roleset>
+
+        <roleset type='targets'>
+            <role>
+                <name>all_targets</name>
+                <description>All targets</description>
+            </role>
+            <role>
+                <name>public</name>
+                <description>communities with public behaviour should be put in here</description>
+            </role>
+        </roleset>
+    </roles>
+    
+    <!--
+        Then apply the representatives for each role
+        -->
+    <groups>
+	<group>
+		<rolename>contributor</rolename>
+		<representatives>
+			<representative type='member'>M001</representative>
+                        <representative type='member'>M002</representative>
+		</representatives>
+	</group>
+	<group>
+		<rolename>reader</rolename>
+		<representatives>
+			<representative type='member'>*</representative>
+		</representatives>
+	</group>
+	<group>
+		<rolename>serviceauthorities</rolename>
+		<representatives>
+			<representative type='membergroup'>authorities_service</representative>
+		</representatives>
+	</group>
+        <group>
+            <rolename>communityauthorities</rolename>
+            <representatives>
+                <representative type='membergroup'>authorities_community</representative>
+            </representatives>
+        </group>
+	<group>
+		<rolename>member_tc001</rolename>
+		<representatives>
+			<representative type='membergroup'>C001</representative>
+		</representatives>
+	</group>
+        <group>
+                <rolename>all_targets</rolename>
+                <representatives>
+                        <representative type='membergroup'>*</representative>
+                        <representative type='communitygroup'>*</representative>
+                        <representative type='servicegroup'>*</representative>
+                </representatives>
+        </group>
+        <group>
+                <rolename>all_operations</rolename>
+                <representatives>
+                        <representative type='operationgroup'>*</representative>
+                </representatives>
+        </group>
+        <group>
+                <rolename>all_actors</rolename>
+                <representatives>
+                        <representative type='membergroup'>*</representative>
+                </representatives>
+        </group>
+    </groups>
+</g4dspolicy>

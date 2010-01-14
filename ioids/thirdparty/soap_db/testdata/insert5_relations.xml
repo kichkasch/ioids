@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<RELATIONS command="INSERT" datatype="Postgresv8.0">
+  <REL name="ioids_relation">
+    <REL name="ioids_relation_type">
+        <ATT name="ioids_relation_type_name" type="text">parent</ATT>
+    </REL>
+    
+    <ATT name="ioids_event_id" type="bigint">1</ATT>
+    
+    <REL name="event">
+        <ATT name="timestmp" type="timestamp">now</ATT> 
+        <ATT name="event_type_id" type="bigint">1</ATT> 
+        <REL name="data">
+            <ATT name="data_text" type="text">ICMP Destination Unreachable (Undefined Code!)</ATT> 
+        </REL>
+        <REL name="reporter">
+          <REL name="agent">
+            <ATT name="agent_name" type="text">prelude log reporter</ATT> 
+            <ATT name="agent_class_id" type="bigint">3</ATT> 
+            <REL name="computer">
+            <ATT name="hostname" type="text">j4-itrl-08</ATT> 
+            <ATT name="ip" type="inet">193.63.129.8</ATT> 
+            </REL>
+            <REL name="process">
+            <REL name="prcss_name">
+                <ATT name="process_name" type="text">snort</ATT>
+            </REL>
+          </REL>
+        </REL>
+        </REL>
+        <REL name="observer">
+        <REL name="agent">
+            <ATT name="agent_name" type="text">snort log observer</ATT> 
+            <ATT name="agent_class_id" type="bigint">3</ATT> 
+            <REL name="computer">
+            <ATT name="hostname" type="text">j4-itrl-08</ATT> 
+            <ATT name="ip" type="inet">193.63.129.8</ATT> 
+            </REL>
+        </REL>
+        </REL>
+        <REL name="destination">
+        <ATT name="dstn_name" type="text">destination name unknown</ATT> 
+        <REL name="agent">
+            <ATT name="agent_name" type="text">destination name</ATT> 
+            <ATT name="agent_class_id" type="bigint">1</ATT> 
+            <REL name="computer">
+            <ATT name="hostname" type="text">unknown destination</ATT> 
+            <ATT name="ip" type="inet">193.63.129.202</ATT> 
+            </REL>
+        </REL>
+        </REL>
+        <REL name="source">
+        <REL name="agent">
+            <ATT name="agent_name" type="text">source name unknown</ATT> 
+            <ATT name="agent_class_id" type="bigint">1</ATT> 
+            <REL name="computer">
+            <ATT name="hostname" type="text">unknown source</ATT> 
+            <ATT name="ip" type="inet">193.63.147.33</ATT> 
+            </REL>
+        </REL>
+        </REL>
+    </REL>
+  </REL>
+  
+</RELATIONS>

@@ -1,0 +1,27 @@
+README for IOIDS
+
+Inter-Organisational Intrusion Detection System
+Michael Pilgermann
+mpilgerm@glam.ac.uk
+
+Content
+-------
+- Introduction
+- Bugs
+- ToDo
+
+
+Introduction
+------------
+IOIDS is a project of Michael Pilgermann for his PhD. It is about a network of different Intrusion Detection
+Systems, which are interconnected in order to exchange incident related information between each other.
+
+IOIDS is making use of facilities from Grid for Digital Security (G4DS) - the other partial project for the
+PhD. Practically, G4DS is providing the communication infrastructure, whereby IOIDS is implementing an
+application of top of this.
+
+Bugs
+----
+
+ToTo
+----

@@ -1,0 +1,31 @@
+INSTALLATION of SoapsyTools
+
+Tools for SoapSy XML RPC database
+Michael Pilgermann
+mpilgerm@glam.ac.uk
+
+Content
+-------
+- Requirements
+- Installation
+- Uninstall
+
+Requirements
+-------------
+- SOAPpy
+- SoapSy 
+- SoapXML RPC by Konstantinos Xynos (kxynos@glam.ac.uk)
+- PyXML
+
+Installation
+------------
+* Unpack the archive
+      tar xzvf soapsytools.tar.gz
+* Install G4DS as a python site package
+    - run the setup module in the g4ds directory with option install (as root):
+      python setup.py install
+
+
+Uninstall
+----------
+* sorry - you have to delete the site-package directory within your python installation manually for now.

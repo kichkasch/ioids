@@ -1,0 +1,76 @@
+#! /bin/sh
+#
+# Init script for G4DS
+# mpilgerm@glam.ac.uk
+#
+# based on skeleton from Debian GNU/Linux
+# based on the example of cliechti@gmx.net
+
+PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/bin
+DAEMON=/usr/bin/XSM.py
+NAME=XSM
+DESC="XSM XML RPC Database Connector"
+
+test -f $DAEMON || exit 1
+
+set -e
+
+case "$1" in
+  start)
+	echo -n "Starting $DESC: "
+	test -f /var/run/$NAME.pid && echo "Aborted" && echo "  XSM is running already." && exit 1
+	start-stop-daemon --start --quiet --pidfile /var/run/$NAME.pid \
+		--exec $DAEMON
+	touch /var/run/$NAME.pid
+	echo "$NAME."
+	;;
+  stop)
+	echo -n "Stopping $DESC: "
+	if test ! -f /var/run/$NAME.pid 
+	then
+		echo "Aborted" && echo "  XSM - no such process." && exit 1
+	fi
+	# I know, all that is a bit dodgy - but finally working
+	# it just looks for all processes containing the name of our program
+	# once, they are found, it figures out the process id of the first of them
+	# just kill it - it's implemented in a way, that it shuts down properly here.
+	#
+	# You have a better way - tell me; will put it immediately :)
+	pid=`ps -ef | grep "python /usr/bin/XSM.py" | awk '{print $2}'`
+	pid=`echo $pid | awk '{print $1}'`
+	kill $pid
+	#start-stop-daemon --stop --quiet --pidfile /var/run/$NAME.pid
+	rm /var/run/$NAME.pid
+	# \	--exec $DAEMON
+	echo "$NAME."
+	;;
+  status)
+	echo -n "Checking $DESC: "
+  	if test -f /var/run/$NAME.pid
+	then
+		echo " XSM is running."
+	else
+		echo " XSM is not running."
+	fi
+	;;
+  restart)
+	#
+	#	If the "reload" option is implemented, move the "force-reload"
+	#	option to the "reload" entry above. If not, "force-reload" is
+	#	just the same as "restart".
+	#
+	echo  "Restarting $DESC"
+	$0 stop
+	sleep 1
+	$0 start	
+	;;
+  *)
+	N=/etc/init.d/$NAME
+	# echo "Usage: $N {start|stop|restart|reload|force-reload}" >&2
+	echo "Usage: $N {start|stop|status|restart}" >&2
+	exit 1
+	;;
+esac
+
+exit 0
+

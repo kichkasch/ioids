@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RELATIONS command="SELECT_RESULTS">
+<REL name='RESULTS_ID' value='1'>
+<REL name='computer'>
+	<ATT name='comp_id'>1</ATT>
+	<ATT name='hostname'>j4-itrl-08</ATT>
+	<ATT name='os'>None</ATT>
+	<ATT name='ip'>193.63.129.8</ATT>
+	<ATT name='mac'>None</ATT>
+	<ATT name='domain'>None</ATT>
+	<ATT name='comp_type_id'>None</ATT>
+</REL>
+<REL name='computer'>
+	<ATT name='comp_id'>2</ATT>
+	<ATT name='hostname'>unknown destination</ATT>
+	<ATT name='os'>None</ATT>
+	<ATT name='ip'>193.63.129.202</ATT>
+	<ATT name='mac'>None</ATT>
+	<ATT name='domain'>None</ATT>
+	<ATT name='comp_type_id'>None</ATT>
+</REL>
+<REL name='computer'>
+	<ATT name='comp_id'>3</ATT>
+	<ATT name='hostname'>unknown source</ATT>
+	<ATT name='os'>None</ATT>
+	<ATT name='ip'>193.63.147.33</ATT>
+	<ATT name='mac'>None</ATT>
+	<ATT name='domain'>None</ATT>
+	<ATT name='comp_type_id'>None</ATT>
+</REL>
+<REL name='computer'>
+	<ATT name='comp_id'>4</ATT>
+	<ATT name='hostname'>j4-itrl-09</ATT>
+	<ATT name='os'>None</ATT>
+	<ATT name='ip'>193.63.129.9</ATT>
+	<ATT name='mac'>None</ATT>
+	<ATT name='domain'>None</ATT>
+	<ATT name='comp_type_id'>None</ATT>
+</REL>
+<REL name='computer'>
+	<ATT name='comp_id'>6</ATT>
+	<ATT name='hostname'>unknown destination 2</ATT>
+	<ATT name='os'>None</ATT>
+	<ATT name='ip'>193.63.129.203</ATT>
+	<ATT name='mac'>None</ATT>
+	<ATT name='domain'>None</ATT>
+	<ATT name='comp_type_id'>None</ATT>
+</REL>
+<REL name='computer'>
+	<ATT name='comp_id'>7</ATT>
+	<ATT name='hostname'>unknown source 2</ATT>
+	<ATT name='os'>None</ATT>
+	<ATT name='ip'>61.62.86.96</ATT>
+	<ATT name='mac'>None</ATT>
+	<ATT name='domain'>None</ATT>
+	<ATT name='comp_type_id'>None</ATT>
+</REL>
+<REL name="TOTAL_RECORDS">6</REL>
+</REL>
+<REL name="TOTAL_RESULTS">1</REL>
+</RELATIONS>
+

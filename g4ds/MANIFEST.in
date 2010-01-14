@@ -1,0 +1,8 @@
+recursive-include sql *.sql
+include xml xml/DefaultCommunity.tcl
+include INSTALL
+include DB_HOWTO
+include README
+include policies policies/default_policy.pol 
+include policies policies/roles.pol
+include g4ds.conf

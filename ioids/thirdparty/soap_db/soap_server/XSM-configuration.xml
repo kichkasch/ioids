@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<XSM_CONF>
+   <CONF databasename="SoapSy">
+      <SET name="debugProg" value="true" file="debug.log" print_out="true"/>
+      <SET name="dbip" value="localhost"/>   
+      <SET name="dbnm" value="ioids"/>
+      <SET name="dbuser" value="uioids"/>
+      <SET name="dbpass" value="pwioids"/>
+      <SET name="dbencod" value="utf-8"/>
+      <SET name="dbunicod" value="1"/>
+<!--      <SET name="databaseSchema" value="SoapSy_DatabaseSchema.xml"/>-->
+      <SET name="databaseSchema" value="/home/michael/programming/ioids/descriptions/IOIDS_SoapSy_DatabaseSchema.xml"/>
+      <SET name="Soap_Server_IP" value="localhost"/>
+      <SET name="Soap_Server_Port" value="9900"/>
+   </CONF>
+</XSM_CONF>

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+	Service description for a knowledge GRID service, in this case the Grid for Digital Security (G4DS) service
+	mpilgerm
+	last change: 2005-01-10
+-->
+
+<kgrid:service 
+	xmlns="http://www.glam.ac.uk/soc/isrg/kgrid/kgrid-20041201"
+	xmlns:kgrid="http://www.glam.ac.uk/soc/isrg/kgrid/kgrid-20041201"
+	xmlns:node="http://www.glam.ac.uk/soc/isrg/common/node=20041201"
+	xmlns:community="http://www.glam.ac.uk/soc/isrg/kgrid/community-20041201"
+	xmlns:property="http://www.glam.ac.uk/soc/isrg/kgrid/kproperty-20041201"
+	xmlns:status="http://www.glam.ac.uk/soc/isrg/kgrid/status-20041201"
+	version="1.0">
+	<kgsid>blabla</kgsid>
+	<name>IOIDS</name>
+	<version>1.0.0</version>
+	<description>Exchanging security related information between organisations</description>
+	<creation>
+		<date>02/12/2004</date>
+		<initiator>
+			<node:name>Univeristy of Glamorgan</node:name>
+			<node:community>
+				<community:name>British Univeristies Network Protection Community</community:name>
+				<community:id>anyIdHere</community:id>
+			</node:community>
+			<node:id>blabla</node:id>
+		</initiator>
+	</creation>
+	
+	<administration>
+		<authorities>
+			<authority>
+				<node:name>Univeristy of Glamorgan</node:name>
+				<node:address>WS-Addressing here</node:address>
+			</authority>
+		</authorities>
+
+		<lifetime extensible="TRUE">
+			<expiredate>01/01/2005</expiredate>
+		</lifetime>
+
+		<subscription open="FALSE">
+			<communities>
+				<community membersinclusive="TRUE">
+					<community:name>British Univeristies Network Protection Community</community:name>
+					<community:id>anyIdHere</community:id>
+				</community>
+				<community membersinclusive="FALSE">
+					<community:name>European Educational IT Community</community:name>
+					<community:id>anyOtherIdHere</community:id>
+				</community>
+			</communities>
+		</subscription>
+	</administration>
+		
+	<properties>
+		<property>
+			<property:name>Detected Attacks</property:name>
+			<property:wsdl>
+				<URL>http://www.glam.ac.uk/soc/isrg/wsdl/g4ds/kgrid.wsdl</URL>
+				<service_name>G4DSService</service_name>
+				<operation_name>getDetectedAttacks</operation_name>
+			</property:wsdl>
+		</property>
+		<property>
+			<property:name>Signaturs and Known Attacks</property:name>
+			<property:address>WS-Address</property:address>
+		</property>
+		<property>
+			<property:name>Countermeasures</property:name>
+			<property:address>WS-Address</property:address>
+		</property>
+	</properties>
+	
+	<status>
+		<status:lastupdate>
+			<status:date>2004-01-12</status:date>
+			<status:time>14:56:41</status:time>
+		</status:lastupdate>
+		<status:numbermembers>1</status:numbermembers>
+	</status>
+</kgrid:service>

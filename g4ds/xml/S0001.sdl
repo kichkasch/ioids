@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ksdl>
+    <id>S0001</id>
+    <version>1.0.0.0</version>
+    <name>g4ds test - home file</name>
+    <creationdate>2005-10-21</creationdate>
+    <lastupdate>2005-10-21</lastupdate>
+
+    <description>
+        <fullname>G4DS test service - for home use</fullname>
+        <contacts>
+            <contact>
+                <name>Michael Pilgermann</name>
+                <organisation>University of Glamorgan / Information Secury Research Group</organisation>
+                <email>mpilgerm@glam.ac.uk</email>
+            </contact>
+        </contacts>
+    </description>
+    
+    <communication>
+        <communities>
+            <community>
+                <id>C12345</id>
+            </community>
+        </communities>
+        
+        <messageformats>
+            <messageformat>
+                <id>S177696fulltext</id>
+                <name>Chatting full text messages</name>
+                <definition/>       <!-- For other services, here will go the DTD / XML Schema or whatever -->
+            </messageformat>
+        </messageformats>
+    </communication>
+    
+    <authorities>
+        <authority>
+            <memberid>M111</memberid>
+        </authority>
+    </authorities>
+</ksdl>

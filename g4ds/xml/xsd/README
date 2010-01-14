@@ -1,0 +1,11 @@
+README for XSD (XmlSchema) creation
+G4DS
+mpilgerm 2005/10/25
+
+The schemas have been created using the tool 'trang' and modified manually afterwards.
+trang may be downloaded from 
+
+http://www.thaiopensource.com/download/trang-20030619.zip
+
+Usage:
+trang FILENAME.xml OUTTPUFILENAME.xsd

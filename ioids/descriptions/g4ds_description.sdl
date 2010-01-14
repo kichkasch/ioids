@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ksdl>
+    <id>S07112005ioids001</id>
+    <version>1.0.0.0</version>
+    <name>ioids</name>
+    <creationdate>2005-11-07</creationdate>
+    <lastupdate>2005-11-09</lastupdate>
+
+    <description>
+        <fullname>Inter Organisation Intrusion Detection System</fullname>
+        <contacts>
+            <contact>
+                <name>Michael Pilgermann</name>
+                <organisation>University of Glamorgan / Information Secury Research Group</organisation>
+                <email>mpilgerm@glam.ac.uk</email>
+            </contact>
+        </contacts>
+    </description>
+    
+    <communication>
+        <communities>
+            <community>
+                <id>C001</id>
+            </community>
+            <community>
+                <id>C002</id>
+            </community>
+        </communities>
+        
+        <messageformats>
+            <messageformat>
+                <id>ioids_idmef_based</id>
+                <name>XML encoded IOIDS messages, which contain IDMEF</name>
+                <definition/>       <!-- For other services, here will go the DTD / XML Schema or whatever -->
+            </messageformat>
+        </messageformats>
+    </communication>
+    
+    <authorities>
+        <authority>
+            <memberid>M001</memberid>
+        </authority>
+        <authority>
+            <memberid>M003</memberid>
+        </authority>
+    </authorities>
+</ksdl>

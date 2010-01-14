@@ -1,0 +1,10 @@
+README for Inter-Organisational Intrusion Detection System
+
+The Inter-Organisational Intrusion Detection System (IOIDS) is a peer-based communication plattform (GRID) 
+for sharing computer incident related information across organisational boundaries.
+
+This is only a meta file - in this repository you may find the code of all programming efforts for the IOIDS project.
+Browse sub directories and see READMEs in there for more information.
+
+First source of information is its home page:
+http://www.kichkasch.de/ioids/

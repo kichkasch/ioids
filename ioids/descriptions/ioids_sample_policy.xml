@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!--
+    Sample IOIDS action policy xml file
+    
+    This file is only a collection of ideas for now - not the final format for ioids policies!
+    
+    Michael Pilgermann
+    mpilgerm@glam.ac.uk
+    
+    History
+    13/12/2005 - mpilgerm
+        - initial version
+    -->
+
+<ioids-policy>
+    <rule>
+        <source origin='local'>     <!-- we could have 'remote' here for msgs from other members -->
+            <member>...</member>
+            <community>...</community>
+        </source>
+        <destination>
+        
+        </destination>
+        
+        <fields>                    <!-- here you can apply filters for certain fields like IP addreses, timestamps, ... -->
+            <source_ip operator="equal">...</source_ip>
+            <timestamp operator="greater_then">...</timestamp>
+        </fields>
+        
+        <patterns>                  <!-- define cross field (full text) patterns here -->
+            <pattern>...</pattern>
+        </patterns>
+        
+        <actions>                    <!-- what shall we do then - you may define several actions -->
+            <action>
+                <operation>forward</operation>
+                <parameters>
+                    <parameter key="destination">C001</parameter>       <!-- to all members of Community C001 -->
+                </parameters>
+            </action>
+        </actions>
+    </rule>
+</ioids-policy>

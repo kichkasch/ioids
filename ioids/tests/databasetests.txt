@@ -1,0 +1,149 @@
+#
+# Tests for python postgresql connectors
+#
+# mpilgerm
+# 12/11/2005
+#
+#
+
+# #######################################
+#
+# Test table
+#
+create table test_date(
+	id serial,
+	date timestamp,
+	primary key (id));
+
+
+insert into test_date(date) values ('now');
+
+select * from test_date
+
+ id |            date
+----+----------------------------
+  1 | 2005-11-12 23:26:49.948777
+(1 row)
+
+
+
+# #######################################
+#
+# 1. Pygresql (http://www.pygresql.org) - Version 1.3.6.2-1
+#
+# test_pg.py
+#
+import pg
+conn = pg.connect('michael','localhost',5432, None, None, 'michael', 'hd5hainer')
+
+res = conn.query('select id, date from test_date')
+list = res.getresult()
+
+for id, timestamp in list:
+        print "%s: %s" %(id, timestamp)
+
+conn.close()
+
+#
+# ****** RESULT ******
+
+python test_pg.py
+1: 2005-11-12 23:26:49.948777
+
+
+
+# #######################################
+#
+# 2. PyPgsql (http://pypgsql.sourceforge.net) - Version 2.4.0-6
+#	based on Egenix DateTime implementation (www.egenix.com/files/python) - Version 2.06
+#		- no support for milliseconds at all
+#
+# test_pypg.py
+#
+
+from pyPgSQL import PgSQL
+conn = PgSQL.connect(host='localhost', user='michael', password='hd5hainer', database='michael',
+        client_encoding = 'utf-8', unicode_results = '1')
+
+cu = conn.cursor()
+cu.execute('select id,date from test_date')
+
+results = cu.fetchall()
+conn.close()
+
+for id, date in results:
+        #print "%s: %s" %(id, date.strftime())
+        print "%s: %s" %(id, date)
+
+#
+# ****** RESULT ******
+
+python test_pypg.py
+1: 2005-11-12 23:26:49.000
+
+
+# #######################################
+#
+# 3. Psycopgl (initd.org/projects/psycopg1) - Version 1.1.18
+#	based on Egenix DateTime implementation (www.egenix.com/files/python) - Version 2.06
+#		- no support for milliseconds at all
+#
+# test_psycop.py
+#
+
+import psycopg
+
+conn = psycopg.connect('dbname=michael user=michael password=hd5hainer host=localhost')
+cu = conn.cursor()
+cu.execute('select id, date from test_date')
+
+res = cu.fetchall()
+conn.close()
+
+for id, date in res:
+        print "%s: %s" %(id, date)
+
+#
+# ****** RESULT ******
+
+python test_psycop.py
+1: 2005-11-12 23:26:49.000
+
+
+# #######################################
+#
+# 4. PoPy (sourceforge.net/projects.popy) - Version 2.0.8-7.1
+#
+# test_popy.py
+#
+
+import PoPy
+
+conn = PoPy.connect('dbname=michael user=michael password=hd5hainer host=localhost')
+cu = conn.cursor()
+cu.execute('select id, date from test_date')
+
+res = cu.fetchall()
+conn.close()
+
+for id, date in res:
+        print "%s: %s" %(id, date)
+
+#
+# ****** RESULT ******
+
+python test_popy.py
+1: 2005-11-12 23:26:49.948777
+
+
+
+#
+# Just as an extension - pygresql also reports the oid
+#
+import pg
+>>> pg.connect('michael','localhost',5432, None, None, 'michael', 'hd5hainer')
+<pgobject object at 0xb7d95470>
+>>> conn = pg.connect('michael','localhost',5432, None, None, 'michael', 'hd5hainer')
+>>> res = conn.query("insert into test_date(date) values ('now')")
+>>> print res
+17930

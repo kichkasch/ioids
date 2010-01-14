@@ -1,0 +1,44 @@
+Installation instructions for SnortDB To SoapSy logger
+
+SnortDB To SoapSy (SnDB2Soapsy)
+Michael Pilgermann
+mpilgerm@glam.ac.uk
+
+Content
+-------
+- Requirements
+- Installation & Configuration
+- Start
+- Uninstall
+
+Requirements
+-------------
+- SOAPpy
+- SoapSy 
+- SoapXML RPC by Konstantinos Xynos (kxynos@glam.ac.uk)
+- PyXML
+- soapsytools
+
+Installation & Configuration
+----------------------------
+* Unpack the archive
+      tar xzvf snortdb2soapsy-0.1.tar.gz
+* Apply settings; check the central config module (config.py):
+    - db settings for the source SnortDB database
+    - SOAP URL for the destination SoapSy db through SoapXML RPC access
+    - address information, which go into event information of new events for the SoapSy database
+    - the rest
+
+Start
+-----
+* Make sure, the SnortDB source database is running
+* Make sure, the destination database (SoapSy DB) is running
+* Start the SoapXML RPC listener
+    /etc/init.d/xsmrc start
+* Start the SnortDB To SoapSy Service
+    python snortdb_to_soapsy.py
+    
+
+Uninstall
+----------
+* Just delete the folder - there is nothing installed into the system at all

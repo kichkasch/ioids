@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RELATIONS command="SELECT_RESULTS">
+<REL name='RESULTS_ID' value='1'>
+<REL name='event'>
+	<ATT name='event_id'>2</ATT>
+	<ATT name='timestmp'>2005-03-21 06:30:17.00</ATT>
+	<ATT name='obsrv_id'>11</ATT>
+	<ATT name='rprt_id'>10</ATT>
+	<ATT name='src_id'>9</ATT>
+	<ATT name='dstn_id'>2</ATT>
+	<ATT name='event_type_id'>1</ATT>
+	<ATT name='data_id'>8</ATT>
+</REL>
+<REL name="TOTAL_RECORDS">1</REL>
+</REL>
+<REL name="TOTAL_RESULTS">1</REL>
+</RELATIONS>
+

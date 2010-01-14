@@ -1,0 +1,38 @@
+Database Howto - How to set up the PostGreSQL database for using with G4DS
+
+Grid for Digital Security
+Michael Pilgermann
+mpilgerm@glam.ac.uk
+
+
+Step by Step guide for first time configuration:
+
+1. Install PostGreSQL (http://www.postgresql.org/)
+    - as part a os user postgres should be created
+2. Create directory for database files
+    mkdir -p /var/lib/postgresql/data
+3. Change owner for the new directory
+    chown postgres /var/lib/postgresql/data
+4. Initialise the database with db user privileges
+    su - postgres
+    initdb -D data
+    exit
+5. Start the database
+    /etc/init.d/postgresql start        (This script may reside on another location depending on your os)
+
+
+Measures for preparing for G4DS use:
+
+6. Change back to os user postgres
+    su - postgres
+7. Create the user 'ug4ds'
+    createuser -P ug4ds              (-P causes a prompt for password)
+    <type password 'pwg4ds'>
+8. Create the database 'g4ds'
+    createdb -O ug4ds g4ds      (-O for owner ug4ds)
+9. Check connection
+    psql -U ug4ds g4ds              (CTRL-D for exit)
+10. Create the objects for G4DS in the database. Browse to the folder sql inside the g4ds folder and run the sql script 'createtables.sql'
+    psql -U ug4ds g4ds -f sql/createtables.sql
+    
+Your database is now ready to work with G4DS.

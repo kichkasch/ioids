@@ -1,0 +1,22 @@
+<!DOCTYPE webproject>
+<webproject>
+  <project usePreviewPrefix="0" type="Local" previewPrefix="" name="g4ds_descriptions" encoding="iso 8859-1" >
+    <upload/>
+    <author>Michael Pilgermann</author>
+    <email>mpilgerm@glam.ac.uk</email>
+    <defaultDTD>XML Schema</defaultDTD>
+    <item url="c001.tcl" uploadstatus="1" />
+    <item url="c002.tcl" uploadstatus="1" />
+    <item url="" uploadstatus="1" />
+    <item url="C12345-home.tcl" uploadstatus="1" />
+    <item url="DefaultCommunity.tcl" uploadstatus="1" />
+    <item url="M001.mdl" uploadstatus="1" />
+    <item url="M002.mdl" uploadstatus="1" />
+    <item url="c004.tcl" uploadstatus="1" />
+    <item url="j130-mp.mdl" uploadstatus="1" />
+    <item url="S177696.sdl" uploadstatus="1" />
+    <templates>templates/</templates>
+    <toolbars>toolbars/</toolbars>
+    <item url="S0001.sdl" uploadstatus="1" />
+  </project>
+</webproject>

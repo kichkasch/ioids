@@ -1,0 +1,22 @@
+#
+# Built backend database schema from the scratch
+#
+
+# settings
+DB_XML_PATH="../descriptions/IOIDS_SoapSy_DatabaseSchema.xml"
+DB_SQL_PATH="../descriptions/IOIDS_SoapSy_DatabaseSchema.sql"
+CONVERTER_PATH="./soap_db/XML Database Schema/XDS.py"
+
+echo "$CONVERTER_PATH"
+
+echo "** 1. Drop database (ioids)"
+dropdb -U uioids ioids 
+
+echo "** 2. Create empty database 'ioids'"
+createdb -O uioids -U postgres ioids 
+
+echo "** 3. Recreate SQL script" 
+python "$CONVERTER_PATH" -i "$DB_XML_PATH" -o "$DB_SQL_PATH"
+
+echo "** 4. Run SQL script against database"
+psql -U uioids -f "$DB_SQL_PATH" ioids

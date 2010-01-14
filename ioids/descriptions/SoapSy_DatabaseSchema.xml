@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<DATABASE name="SoapSy" datatype="Postgresv8.0">
+<TABLE name="agent">
+    <COLUMNS>
+        <COLUMN type="bigserial" primary_key="true">agent_id</COLUMN> 
+        <COLUMN type="text" index="true" not_null="true">agent_name</COLUMN> 
+        <COLUMN type="bigint" foreign_key="true" refTable="agent_class" refColumn="agent_class_id" not_null="true">agent_class_id</COLUMN> 
+        <COLUMN type="bigint" foreign_key="true" refTable="computer" refColumn="comp_id" not_null="true">comp_id</COLUMN> 
+    </COLUMNS>
+    
+    <USERS>
+        <USER grant="ALL">uioids</USER> 
+    </USERS>
+    
+</TABLE>
+    
+<TABLE name="agent_class">
+    <COLUMNS>
+        <COLUMN type="serial" primary_key="true">agent_class_id</COLUMN> 
+        <COLUMN type="varchar(3)" index="true" not_null="true">agent_class_name</COLUMN> 
+        <COLUMN type="text" not_null="true">agent_class_dscr</COLUMN> 
+    </COLUMNS>
+    
+    <USERS>
+        <USER grant="ALL">uioids</USER> 
+    </USERS>
+    
+    <INSERT>
+        <ROWS>
+            <ROWDATA name="agent_class_name">'000'</ROWDATA> 
+            <ROWDATA name="agent_class_dscr">'Unknown Agent Class'</ROWDATA> 
+        </ROWS>
+        <ROWS>
+            <ROWDATA name="agent_class_name">'c00'</ROWDATA> 
+            <ROWDATA name="agent_class_dscr">'computer'</ROWDATA> 
+        </ROWS>
+        <ROWS>
+            <ROWDATA name="agent_class_name">'cp0'</ROWDATA> 
+            <ROWDATA name="agent_class_dscr">'process runnning on computer'</ROWDATA> 
+        </ROWS>
+        <ROWS>
+            <ROWDATA name="agent_class_name">'cpu'</ROWDATA> 
+            <ROWDATA name="agent_class_dscr">'user logged and running process on computer'</ROWDATA> 
+        </ROWS>
+    </INSERT>
+</TABLE>
+
+<TABLE name="observer">
+    <COLUMNS>
+        <COLUMN type="bigserial" primary_key="true">obsrv_id</COLUMN> 
+        <COLUMN type="text" index="true">obsrv_name</COLUMN> 
+        <COLUMN type="bigint" foreign_key="true" refTable="agent" refColumn="agent_id" not_null="true">agent_id</COLUMN> 
+    </COLUMNS>
+    
+    <USERS>
+        <USER grant="ALL">uioids</USER> 
+    </USERS>
+</TABLE>
+
+<TABLE name="reporter">
+    <COLUMNS>
+        <COLUMN type="bigserial" primary_key="true">rprt_id</COLUMN> 
+        <COLUMN type="text" index="true">rprt_name</COLUMN> 
+        <COLUMN type="bigint" foreign_key="true" refTable="agent" refColumn="agent_id" not_null="true">agent_id</COLUMN> 
+    </COLUMNS>
+    
+    <USERS>
+        <USER grant="ALL">uioids</USER> 
+    </USERS>
+</TABLE>
+    
+<TABLE name="source">
+    <COLUMNS>
+        <COLUMN type="bigserial" primary_key="true">src_id</COLUMN> 
+        <COLUMN type="text" index="true">src_name</COLUMN> 
+        <COLUMN type="bigint" foreign_key="true" refTable="agent" refColumn="agent_id" not_null="true">agent_id</COLUMN> 
+    </COLUMNS>
+    
+    <USERS>
+        <USER grant="ALL">uioids</USER> 
+    </USERS>
+</TABLE>
+    
+<TABLE name="destination">
+    <COLUMNS>
+        <COLUMN type="bigserial" primary_key="true">dstn_id</COLUMN> 
+        <COLUMN type="text" index="true" not_null="true">dstn_name</COLUMN> 
+        <COLUMN type="bigint" foreign_key="true" refTable="agent" refColumn="agent_id" not_null="true">agent_id</COLUMN> 
+    </COLUMNS>
+    
+    <USERS>
+        <USER grant="ALL">uioids</USER> 
+    </USERS>
+</TABLE>
+    
+<TABLE name="event">
+    <COLUMNS>
+        <COLUMN type="bigserial" primary_key="true">event_id</COLUMN> 
+        <COLUMN type="timestamp" index="true" not_null="true">timestmp</COLUMN> 
+        <COLUMN type="bigint" foreign_key="true" refTable="observer" refColumn="obsrv_id" not_null="true">obsrv_id</COLUMN> 
+        <COLUMN type="bigint" foreign_key="true" refTable="reporter" refColumn="rprt_id" not_null="true">rprt_id</COLUMN> 
+        <COLUMN type="bigint" foreign_key="true" refTable="source" refColumn="src_id" not_null="true">src_id</COLUMN> 
+        <COLUMN type="bigint" foreign_key="true" refTable="destination" refColumn="dstn_id" not_null="true">dstn_id</COLUMN> 
+        <COLUMN type="bigint" foreign_key="true" refTable="event_type" refColumn="event_type_id" not_null="true">event_type_id</COLUMN> 
+        <COLUMN type="bigint" foreign_key="true" refTable="data" refColumn="data_id">data_id</COLUMN> 
+    </COLUMNS>
+    
+    <USERS>
+        <USER grant="ALL">uioids</USER> 
+    </USERS>
+</TABLE>
+    
+<TABLE name="data">
+    <COLUMNS>
+        <COLUMN type="serial" primary_key="true">data_id</COLUMN> 
+        <COLUMN type="text">data_text</COLUMN> 
+        <COLUMN type="bigint" foreign_key="true" refTable="encoding" refColumn="encoding_id">encoding_id</COLUMN> 
+    </COLUMNS>
+    
+    <USERS>
+        <USER grant="ALL">uioids</USER> 
+    </USERS>
+</TABLE>
+    
+<TABLE name="computer">
+    <COLUMNS>
+        <COLUMN type="bigserial" primary_key="true">comp_id</COLUMN> 
+        <COLUMN type="text" index="true" not_null="true">hostname</COLUMN> 
+        <COLUMN type="text">os</COLUMN> 
+        <COLUMN type="inet" index="true" not_null="true">ip</COLUMN> 
+        <COLUMN type="macaddr">mac</COLUMN> 
+        <COLUMN type="text" index="true">domain</COLUMN> 
+        <COLUMN type="bigint" foreign_key="true" refTable="comp_type" refColumn="comp_type_id">comp_type_id</COLUMN> 
+    </COLUMNS>
+    
+    <USERS>
+        <USER grant="ALL">uioids</USER> 
+    </USERS>
+</TABLE>
+    
+<TABLE name="comp_type">
+    <COLUMNS>
+        <COLUMN type="serial" primary_key="true">comp_type_id</COLUMN> 
+        <COLUMN type="text" index="true">comp_type_name</COLUMN> 
+    </COLUMNS>
+    
+    <USERS>
+        <USER grant="ALL">uioids</USER> 
+    </USERS>
+</TABLE>
+    
+<TABLE name="process">
+    <COLUMNS>
+        <COLUMN type="bigserial" primary_key="true">prcss_id</COLUMN> 
+        <COLUMN type="bigint">prcss_pid</COLUMN>
+        <COLUMN type="bigint" foreign_key="true" refTable="prcss_name" refColumn="prcss_name_id" not_null="true">prcss_name_id</COLUMN> 
+        <COLUMN type="bigint" foreign_key="true" refTable="prcss_type" refColumn="prcss_type_id">prcss_type_id</COLUMN> 
+        <COLUMN type="bigint" foreign_key="true" refTable="computer" refColumn="comp_id" not_null="true">comp_id</COLUMN> 
+        <COLUMN type="bigint" foreign_key="true" refTable="usr" refColumn="usr_id">usr_id</COLUMN> 
+    </COLUMNS>
+    
+    <USERS>
+        <USER grant="ALL">uioids</USER> 
+    </USERS>
+</TABLE>
+    
+<TABLE name="prcss_name">
+    <COLUMNS>
+        <COLUMN type="bigserial" primary_key="true">prcss_name_id</COLUMN> 
+        <COLUMN type="text" index="true">process_name</COLUMN> 
+    </COLUMNS>
+    
+    <USERS>
+        <USER grant="ALL">uioids</USER> 
+    </USERS>
+</TABLE>
+    
+<TABLE name="prcss_type">
+    <COLUMNS>
+        <COLUMN type="serial" primary_key="true">prcss_type_id</COLUMN> 
+        <COLUMN type="text">prcss_type_name</COLUMN> 
+    </COLUMNS>
+    
+    <USERS>
+        <USER grant="ALL">uioids</USER> 
+    </USERS>
+    
+    <INSERT>
+        <ROWS>
+            <ROWDATA name="prcss_type_name">'user'</ROWDATA> 
+        </ROWS>
+        <ROWS>
+            <ROWDATA name="prcss_type_name">'system'</ROWDATA> 
+        </ROWS>
+        <ROWS>
+            <ROWDATA name="prcss_type_name">'zombie'</ROWDATA> 
+        </ROWS>
+        <ROWS>
+            <ROWDATA name="prcss_type_name">'Unknown'</ROWDATA> 
+        </ROWS>
+    </INSERT>
+</TABLE>
+    
+<TABLE name="usr_group">
+    <COLUMNS>
+        <COLUMN type="serial" primary_key="true">usr_group_id</COLUMN> 
+        <COLUMN type="text" index="true">usr_group_name</COLUMN> 
+        <COLUMN type="text">usr_group_domain</COLUMN> 
+    </COLUMNS>
+    
+    <USERS>
+        <USER grant="ALL">uioids</USER> 
+    </USERS>
+</TABLE>
+    
+<TABLE name="usr">
+    <COLUMNS>
+        <COLUMN type="bigserial" primary_key="true">usr_id</COLUMN> 
+        <COLUMN type="text" index="true">usr_name</COLUMN> 
+        <COLUMN type="bigint" foreign_key="true" refTable="usr_group" refColumn="usr_group_id">usr_group_id</COLUMN> 
+    </COLUMNS>
+    
+    <USERS>
+        <USER grant="ALL">uioids</USER> 
+    </USERS>
+</TABLE>
+    
+<TABLE name="event_type">
+    <COLUMNS>
+        <COLUMN type="bigserial" primary_key="true">event_type_id</COLUMN> 
+        <COLUMN type="text" index="true">event_type_name</COLUMN> 
+    </COLUMNS>
+    
+    <USERS>
+        <USER grant="ALL">uioids</USER> 
+    </USERS>
+</TABLE>
+    
+<TABLE name="encoding">
+    <COLUMNS>
+        <COLUMN type="bigserial" primary_key="true">encoding_id</COLUMN> 
+        <COLUMN type="varchar(8)" index="true">encoding_type</COLUMN> 
+    </COLUMNS>
+    
+    <USERS>
+        <USER grant="ALL">uioids</USER> 
+    </USERS>
+    <INSERT>
+        <ROWS>
+            <ROWDATA name="encoding_type">'ASCII'</ROWDATA> 
+        </ROWS>
+        <ROWS>
+            <ROWDATA name="encoding_type">'HEX'</ROWDATA> 
+        </ROWS>
+        <ROWS>
+            <ROWDATA name="encoding_type">'OCT'</ROWDATA> 
+        </ROWS>
+        <ROWS>
+            <ROWDATA name="encoding_type">'NOT'</ROWDATA> 
+        </ROWS>
+    </INSERT>
+</TABLE>
+</DATABASE>

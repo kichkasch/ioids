@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RELATIONS command="SELECT">
+  <REL name="event" val="all">
+    <ATT name="timestmp" op="elk">17</ATT>
+  </REL>
+</RELATIONS>

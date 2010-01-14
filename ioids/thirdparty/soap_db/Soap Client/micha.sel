@@ -1,0 +1,6 @@
+<RELATIONS command='SELECT'>
+<REL name='event' val='all'>
+	<ATT name='oid' op='gt'>30608</ATT>
+</REL>
+</RELATIONS>
+

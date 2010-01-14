@@ -1,0 +1,85 @@
+INSTALLATION of IOIDS
+
+Inter-Organisational Intrusion Detection System (IOIDS)
+Michael Pilgermann
+mpilgerm@glam.ac.uk
+
+Content
+-------
+- Requirements
+- Installation & Configuration
+- Start
+- Uninstall
+
+Requirements
+------------
+- Postgres Database (tested on version 8)
+- Python 2.3+
+- G4DS
+- SoapSy 
+- PyXML
+- SoapXML RPC by Konstantinos Xynos (kxynos@glam.ac.uk) (now coming with this package)
+- SoapSy Tools (download from j4-itrl-12.comp.glam.ac.uk/g4ds#download)
+
+Installation & Configuration
+----------------------------
+
+1) G4DS preparations
+- install g4ds first (from now we assume it's working)
+- create a private key with g4ds, which we use later on for connecting (authenticating) against it (maintain in g4ds)
+    * save the private key at the location stated in your ioids config file
+- make this service known to g4ds
+    * run g4ds maintain and apply the service description (provided in the sub folder descriptions) to the g4ds system
+
+2) Unpack archive to location of your choice
+- change into this directory
+
+3) Database preparations
+- SoapXML RPC database connector is now included in the IOIDS package - it is installed automatically, ones you run the setup of ioids (#4)
+- Create an SQL script using the provided XDS program
+    * run XDS python program and create SQL script this way
+        python thirdparty/soap_db/soap_server/XDS.py -i desriptions/IOIDS_SoapSy_DatabaseSchema.xml -o descriptions/IOIDS_SoapSy_DatabaseSchema.sql
+- Change os user to postgres
+    * su - postgres
+- Create user in database mangement system
+    * createuser -P uioids
+    <type password 'pwioids'>
+- Create database for ioids
+    * createdb -O uioids ioids
+    * exit (leave user postgres)
+- Run the provided SQL Script and create relations in database
+    * psql -U uioids [-h localhost] ioids -f descriptions/IOIDS_SoapSy_DatabaseSchema.sql 
+    
+4) Installation
+- Distribute the files over the local filesystem (sitepackages, config files and programs) - as root
+    * su
+    * python setup.py install
+    * exit
+- check and adjust permissions for rc-script and python script
+    * chmod 755 /etc/init.d/xsmrc
+    * chmod 755 /usr/bin/XSM.py
+- Make the IOIDS access control policies known to the G4DS system
+    * copy policy files (descriptions/*.pol) to G4DS policy system folder (default /var/lib/g4ds/policies)
+    * register files in g4ds configuration file (default /etc/g4ds.conf - value POLICY_FILES)
+    * apply changes to current g4ds policies for activation (see descriptions/ioids_g4ds_policy.pol for details)
+    
+5) Configuration
+- edit the global configuration file (config.py)
+    * check everything in there and adjust to your needs
+- edit the SoapXML RPC database configuration file
+    * check settings in /etc/XSM-configuration.xml
+    
+Start
+-----
+- start G4DS (as root)
+    /etc/init.d/g4dsrc start
+- start SoapXML RPC database (as root)
+    /etc/init.d/xsmrc start
+- start ioids
+    python ioids.py
+
+    
+Uninstall
+---------
+coming soon
+

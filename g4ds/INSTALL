@@ -1,0 +1,90 @@
+INSTALLATION of G4DS
+
+Grid for Digital Security
+Michael Pilgermann
+mpilgerm@glam.ac.uk
+
+Content
+-------
+- Requirements
+- Unpacking
+- Before installation
+- Configuration
+- Distribution
+- Uninstall
+
+Requirements
+------------
+* Python Installation (http://www.python.org)
+* PostGreSQL Database (http://www.postgresql.org/)
+* python site package 'pygresql' for connecting against the database (http://www.pygresql.org/)
+* python site package 'PyXML' (http://pyxml.sourceforge.net/)
+* python site package 'SSLCrypto' (http://www.freenet.org.nz/python/SSLCrypto/)
+    - depending on an openssl installation (source / headers)
+* for SOAP protocol implementation
+    - site package 'SOAPpy' (http://pywebsvcs.sourceforge.net/)
+    - site package 'fpconst' (http://research.warnes.net:9090/~warnes/fpconst/)
+* for encryption algorithms
+    - site package 'pycrypto' - RSA, ElGamal (http://www.amk.ca/python/code/crypto.html)
+        There is a conflict between several versions of PyCrypto. Make sure you are running
+        the same version on all nodes. Current Version here: pycrypto-2.0-r1
+        Furthermore, make sure you install the full PyCrypto version (otherwise, ezPyCrypto will
+        fail to load) - some distributions (such as Ubuntu) do not provide all algorithms by default and
+        you have to download and install manually.
+    - site package 'ezPyCrypto' - RSA, ElGamal (http://www.freenet.org.nz/ezPyCrypto/)
+* Gentoo's python module output.py (for colored console output)
+    - if you are not running gentoo, copy the file 'output.py' from the sub directory 'g4ds/thridparty' into the main folder 'g4ds'
+    
+Unpacking
+---------
+* Unpack the archive to a location of your choice
+
+
+Before installation
+-------------------
+* The database has to be prepared (see also help file DB_HOWTO for more details)
+    - create a user (default name 'ug4ds' / default password 'pwg4ds')
+    - create a database (default name 'g4ds')
+    - create the required tables in the database using the provided script 'sql/createtables.sql'
+    
+
+Configuration
+-------------
+* Edit the main configuration file (module) config.py in the program main folder 'g4ds'
+    - apply your settings for your organisation at the top of the file (name, organisation, ...) - will be part of your member description
+    - apply your settings for the database host and port
+    - if you didn't use default user / password / database; apply the settings here
+* Edit the configuration file for protocols in 'g4ds/protocols/config.py'
+    - check the settings for the protocols, especially the local IP address and ports
+* Edit the configuration file for algorithms in 'g4ds/algorithms/config.py'
+* Run the install module 'install.py' from the g4ds directory 
+    - This prepares your local node for G4DS by distributing the knowledge of the config files to the managers and database
+
+    
+Distribution
+------------
+The following steps have to be performed with root priveleges!
+    su -    (password)
+
+* Install G4DS as a python site package
+    - run the setup module in the g4ds directory with option install:
+      python setup.py install
+* Check permissions on the files
+    - init script "/etc/init.d/g4dsrc" should be executable for "root"
+        chmod u+x /etc/init.d/g4dsrc
+    - g4ds listener module "/usr/sbin/g4dslistener.py" should be executable for "root"
+        chmod u+x /usr/sbin/g4dslistener.py
+* Want to start G4DS backend at bootup time? 
+    - For most Linux distributions: Link from your directory of the default boot level to the g4dsrc script:
+        ln -s /etc/init.d/g4dsrc /etc/rc.d/rc3.d/99g4dsrc   (assuming, 3 is your default run level)
+    - For Gentoo Linux
+        rc-update add g4dsrc default
+    
+Uninstall
+---------
+* Run the sql script for deleting all the tables 'sql/droptables.sql'
+* Delete the g4ds directory with all subdirectories
+* Delete the file "/etc/init.d/g4dsrc" (and possible links to it in your runlevel directories)
+* Delete the g4ds listener module "g4dslistener.py" from the directory "/usr/sbin"
+* Delete the site package g4ds from your local python installation
+(sorry for not providing something more handy here yet)

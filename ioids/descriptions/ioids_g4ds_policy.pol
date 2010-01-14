@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    IOIDS Policy file for Grid for Digital Security 
+
+    last change: 2005-12-12
+
+
+Don't forget to put this rule in your major ruleset policy
+            <rule>
+                <id>R00005</id>
+                <comment>everything with ioids goes to ioids</comment>
+                <actor type='role'>all_actors</actor>
+                <action type='action_id'>ioids</action>
+                <target type='role'>all_targets</target>
+                <reaction type='redirect'>RS_IOIDS_001</reaction>
+            </rule>
+
+    -->
+<g4dspolicy>
+    <!--
+        Define the names and descriptions for the roles first
+        -->
+    <roles>
+        <roleset type='actors'>
+            <role>
+                <name>ioids_trustees</name>
+                <description>Trusted IOIDS parties</description>
+            </role>
+            <role>
+                <name>ioids_readers</name>
+                <description>These people may download information from me</description>
+            </role>
+        </roleset>
+
+        <roleset type='operations'>
+            <role>
+                <name>ioids_write</name>
+                <description>All operations with write access</description>
+            </role>
+            <role>
+                <name>ioids_read</name>
+                <description>All operations with read access</description>
+            </role>
+        </roleset>
+
+        <roleset type='targets'>
+            <role>
+                <name>all_targets</name>
+                <description>All targets</description>
+            </role>
+        </roleset>
+    </roles>
+    
+    <!--
+        Then apply the representatives for each role
+        -->
+    <groups>
+	<group>
+		<rolename>ioids_trustees</rolename>
+		<representatives>
+			<representative type='member'>M001</representative>
+			<representative type='member'>M111</representative>
+			<representative type='member'>M222</representative>
+		</representatives>
+	</group>
+
+	<group>
+		<rolename>ioids_readers</rolename>		<!-- all for now -->
+		<representatives>
+			<representative type='membergroup'>S07112005ioids001</representative>
+		</representatives>
+	</group>
+
+        <group>
+                <rolename>ioids_write</rolename>
+                <representatives>
+                        <representative type='operationgroup'>ioids.write</representative>
+                </representatives>
+        </group>
+
+        <group>
+                <rolename>ioids_read</rolename>
+                <representatives>
+                        <representative type='operationgroup'>ioids.read</representative>
+                </representatives>
+        </group>
+    </groups>
+
+
+    <rules>
+        <ruleset>
+            <id>RS_IOIDS_001</id>
+            <name>IOIDS Major Ruleset</name>
+            <rule>
+                <id>R00000</id>
+                <comment>allow everybody to read</comment>
+                <actor type='role'>ioids_readers</actor>
+                <action type='role'>ioids_read</action>
+                <target type='role'>all_targets</target>
+                <reaction type='direct'>allow</reaction>
+            </rule>
+
+            <rule>
+                <id>R00010</id>
+                <comment>allow trustees to write</comment>
+                <actor type='role'>ioids_trustees</actor>
+                <action type='role'>ioids_write</action>
+                <target type='role'>all_targets</target>
+                <reaction type='direct'>allow</reaction>
+            </rule>
+
+            <rule>
+                <id>R00100</id>
+                <comment>everything else if forbidden</comment>
+                <actor type='role'>all_actors</actor>
+                <action type='role'>all_operations</action>
+                <target type='role'>all_targets</target>
+                <reaction type='direct'>drop</reaction>
+            </rule>
+            
+        </ruleset>
+
+        
+    </rules></g4dspolicy>

@@ -1,0 +1,24 @@
+README for SoapsyTools
+
+Tools for SoapSy XML RPC database
+Michael Pilgermann
+mpilgerm@glam.ac.uk
+
+Content
+-------
+- Introduction
+- Bugs
+- ToDo
+
+
+Introduction
+------------
+With soapsy tools come some functions and constants which are useful and reuseable when working with the 
+SoapSy XML RPC database.
+
+Bugs
+----
+
+ToDo
+----
+

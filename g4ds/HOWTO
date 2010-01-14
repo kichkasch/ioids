@@ -1,0 +1,74 @@
+HOWTO for G4DS
+
+Grid for Digital Security
+Michael Pilgermann
+mpilgerm@glam.ac.uk
+
+
+Content
+-------
+1. Structure
+2. Start Backend
+3. Connect with client application
+
+This document gives a brief introduction, are to use the G4DS implementation.
+
+I assume, you have gone through the instructions of the INSTALL doc, and your g4ds is ready to be used.
+
+
+1. Structure
+------------
+In order to allow several applications to use G4DS at the same time, a sort of client / server approach has been 
+put into place. This is implemented very basic using FIFOs. It just makes it compulsory, that you start the server
+before you can use G4DS with any application.
+
+2. Start Backend
+----------------
+The easiest way to start the server is the use of the provided init script (g4dsrc). During the installation process, it is
+copied to the folder "/etc/init.d". Start the server with the command:
+
+/etc/init.d/g4dsrc start
+
+You may stop it later on using
+
+/etc/init.d/g4dsrc stop
+
+Any time you may check whether it's running using the command:
+
+/etc/init.d/g4dsrc status
+
+Whenever you wish to start the server manually, the python script "g4dslistener.py" has been installed to "/usr/sbin"
+during the installation process
+
+3. Connect with client application
+----------------------------------
+G4DS implements Assymetric Key authentication for clients to connect against the G4DS Backend. Hence, before you
+connect with your application, you must create a private key. Start the maintainence environment of G4DS and go 
+through the following instructions:
+
+python maintain.py      # this starts into interactive mode
+
+Choose option '1' here and create a new public / private key pair. Export the private key to a location, where you can
+access it from your application later on; add the public key to the list of authorised services.
+
+Once, the server has been started and the key has been created, we may connect with our client application. 
+A sample service has been provided, 
+which illustrates the process in a very simple manner (Check the web site - j4-itrl-12.comp.glam.ac.uk/g4ds - for details). 
+Basically, the following commands are to be used within your Python code:
+
+
+path_private_key = 'your_location_of_key'
+service_id = 'S1234567890'                                # ID of your service
+
+from g4ds.g4dsservice import G4dsService        # g4dsservice provides the interface for the client applications
+gs = G4dsService()
+gs.connect(service_id, None, path_private_key, incomingMessageProcessor)
+
+... do lots of stuff here
+
+gs.sendMessage(destinationMemberId, destinationCommunityId, message)        # sending one message through G4DS
+
+gs.disconnect()                                                   # disconnect from the backend
+
+def incomingMessageProcessor(message):
+    pass        # do whatever you want to do with incoming messages from G4DS

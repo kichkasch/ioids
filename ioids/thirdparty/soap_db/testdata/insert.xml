@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<RELATIONS command="INSERT" datatype="Postgresv8.0">
+  <REL name="event">
+    <ATT name="timestmp" type="timestamp">'2005-11-11 16:46:00.26'</ATT> 
+    <ATT name="event_type_id" type="bigint">'1'</ATT> 
+    <REL name="data">
+  	<ATT name="data_text" type="text">'ICMP Destination Unreachable (Undefined Code!)'</ATT> 
+    </REL>
+    <REL name="reporter">
+      <REL name="agent">
+        <ATT name="agent_name" type="text">'snort log reporter'</ATT> 
+        <ATT name="agent_class_id" type="bigint">'3'</ATT> 
+        <REL name="computer">
+          <ATT name="hostname" type="text">'j4-itrl-08'</ATT> 
+          <ATT name="ip" type="inet">'193.63.129.8'</ATT> 
+        </REL>
+      </REL>
+    </REL>
+    <REL name="observer">
+      <REL name="agent">
+        <ATT name="agent_name" type="text">'snort log observer'</ATT> 
+        <ATT name="agent_class_id" type="bigint">'3'</ATT> 
+        <REL name="computer">
+          <ATT name="hostname" type="text">'j4-itrl-08'</ATT> 
+          <ATT name="ip" type="inet">'193.63.129.8'</ATT> 
+        </REL>
+      </REL>
+    </REL>
+    <REL name="destination">
+      <ATT name="dstn_name" type="text">'destination name unknown'</ATT> 
+      <REL name="agent">
+        <ATT name="agent_name" type="text">'destination name'</ATT> 
+        <ATT name="agent_class_id" type="bigint">'1'</ATT> 
+        <REL name="computer">
+           <ATT name="hostname" type="text">'unknown destination'</ATT> 
+           <ATT name="ip" type="inet">'193.63.129.202'</ATT> 
+        </REL>
+      </REL>
+    </REL>
+    <REL name="source">
+      <REL name="agent">
+        <ATT name="agent_name" type="text">'source name unknown'</ATT> 
+        <ATT name="agent_class_id" type="bigint">'1'</ATT> 
+        <REL name="computer">
+          <ATT name="hostname" type="text">'unknown source'</ATT> 
+          <ATT name="ip" type="inet">'193.63.147.33'</ATT> 
+        </REL>
+      </REL>
+    </REL>
+  </REL>
+
+  
+</RELATIONS>

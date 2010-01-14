@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!ELEMENT RELATIONS (REL+)>
+<!ATTLIST RELATIONS
+	command CDATA #FIXED "SELECT"
+>
+<!ELEMENT REL (ATT*, REL*)>
+<!ATTLIST REL
+	name CDATA #REQUIRED
+	val CDATA #IMPLIED
+>
+<!ELEMENT ATT (#PCDATA)>
+<!ATTLIST ATT
+	name CDATA #REQUIRED
+	op ( lt | ltq | gt | gtq | eq | neq | lk | slk | elk | nlk | nslk | nelk) #IMPLIED
+>

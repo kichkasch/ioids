@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xs:element name="ksdl">
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="id">
+          <xs:sequence>
+            <xs:element ref="version"/>
+            <xs:element ref="name"/>
+            <xs:element ref="creationdate"/>
+            <xs:element ref="lastupdate"/>
+            <xs:element ref="description"/>
+            <xs:element ref="communication"/>
+            <xs:element ref="authorities"/>
+          </xs:sequence>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="version" type="xs:string"/>
+  <xs:element name="creationdate" type="xs:string"/>
+  <xs:element name="lastupdate" type="xs:string"/>
+  <xs:element name="description">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="fullname"/>
+        <xs:element ref="contacts"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="fullname" type="xs:string"/>
+  <xs:element name="contacts">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="contact"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="contact">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="name"/>
+        <xs:element ref="organisation"/>
+        <xs:element ref="email"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="organisation" type="xs:string"/>
+  <xs:element name="email" type="xs:string"/>
+  <xs:element name="communication">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="communities"/>
+        <xs:element ref="messageformats"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="communities">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="community"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="community" type="id"/>
+  <xs:element name="messageformats">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="messageformat"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="messageformat">
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="id">
+          <xs:sequence>
+            <xs:element ref="name"/>
+            <xs:element ref="definition"/>
+          </xs:sequence>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="definition">
+    <xs:complexType/>
+  </xs:element>
+  <xs:element name="authorities">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="authority"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="authority">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="memberid"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="memberid" type="xs:string"/>
+  <xs:complexType name="id">
+    <xs:sequence>
+      <xs:element ref="id"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="id" type="xs:string"/>
+  <xs:element name="name" type="xs:string"/>
+</xs:schema>
